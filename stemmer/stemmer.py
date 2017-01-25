@@ -46,21 +46,21 @@ def parse_families():
 def find_families(raw_freqs):
     groups = parse_families()
 
-    headwords = defaultdict(dict)
+    families = defaultdict(dict)
     for word, freq in raw_freqs.items():
         has_a_family = False
         for lemma, members in groups.items():
             if word in members:
-                headwords[lemma][word] = freq
+                families[lemma][word] = freq
                 has_a_family = True
 
         # if the headword is a loner
         if not has_a_family:
-            headwords[word][word] = freq
-    return headwords
+            families[word][word] = freq
+    return families
 
 
-def create_headwords(word_list):
+def group_families(word_list):
     raw_frequencies = find_raw_freqs(word_list)
     regrouped_frequencies = find_families(raw_frequencies)
     return regrouped_frequencies
@@ -69,32 +69,32 @@ def create_headwords(word_list):
 def gen_total_types(input):
     def update_total(lemma, family):
         for member, freq in family.items():
-            total_headwords[lemma][member] += freq
-    total_headwords = {}
+            total_grouped_families[lemma][member] += freq
+    total_grouped_families = {}
     for f in os.listdir(input):
         content = open_file('{}/{}'.format(input, f))
         segmented = pre_processing(content)
-        current_headwords = create_headwords(segmented)
-        for lemma, family in current_headwords.items():
-            if lemma not in total_headwords:
-                total_headwords[lemma] = defaultdict(int)
+        current_families = group_families(segmented)
+        for lemma, family in current_families.items():
+            if lemma not in total_grouped_families:
+                total_grouped_families[lemma] = defaultdict(int)
                 update_total(lemma, family)
             else:
                 update_total(lemma, family)
-    return total_headwords
+    return total_grouped_families
 
 
-def gen_headwords_freq(member_freq):
-    headwords = []
+def gen_grouped_freq(member_freq):
+    grouped_stems = []
     for lemma, family in member_freq.items():
         if len(family.keys()) == 1:
-            headwords.append([(lemma, family[lemma])])
+            grouped_stems.append([(lemma, family[lemma])])
         else:
             freq = sum(list(family.values()))
-            headword = (lemma, freq)
+            pair = (lemma, freq)
             sorted_family = sorted([(member, m_freq) for member, m_freq in family.items()], key=lambda x: x[1], reverse=True)
-            headwords.append([headword]+sorted_family)
-    freq_sorted = sorted(headwords, key=lambda x: x[0][1], reverse=True)
+            grouped_stems.append([pair]+sorted_family)
+    freq_sorted = sorted(grouped_stems, key=lambda x: x[0][1], reverse=True)
     return freq_sorted
 
 
@@ -120,9 +120,9 @@ def flatten_freq_struct(freqs):
 
 def main():
     members_freq = gen_total_types('input')
-    headwords_freqs = gen_headwords_freq(members_freq)
-    flattened = flatten_freq_struct(headwords_freqs)
-    header = generate_header(headwords_freqs)
+    grouped_freqs = gen_grouped_freq(members_freq)
+    flattened = flatten_freq_struct(grouped_freqs)
+    header = generate_header(grouped_freqs)
     write_csv('output/total_freqs.csv', flattened, header=header)
 
 main()
