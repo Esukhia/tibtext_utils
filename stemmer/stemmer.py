@@ -1,5 +1,6 @@
 import os
 import re
+import csv
 from collections import defaultdict
 from PyTib.common import open_file, write_csv
 
@@ -124,5 +125,6 @@ def main():
     flattened = flatten_freq_struct(grouped_freqs)
     header = generate_header(grouped_freqs)
     write_csv('output/total_freqs.csv', flattened, header=header)
+
 
 main()
