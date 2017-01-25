@@ -92,9 +92,10 @@ def gen_headwords_freq(member_freq):
         else:
             freq = sum(list(family.values()))
             headword = (lemma, freq)
-            sorted_family = sorted([(member, m_freq) for member, m_freq in family.items()], key=lambda x: x[1])
+            sorted_family = sorted([(member, m_freq) for member, m_freq in family.items()], key=lambda x: x[1], reverse=True)
             headwords.append([headword]+sorted_family)
-    return headwords
+    freq_sorted = sorted(headwords, key=lambda x: x[0][1], reverse=True)
+    return freq_sorted
 
 
 def generate_header(freqs):
@@ -118,8 +119,7 @@ def flatten_freq_struct(freqs):
 
 
 def main():
-    in_path = 'input'
-    members_freq = gen_total_types(in_path)
+    members_freq = gen_total_types('input')
     headwords_freqs = gen_headwords_freq(members_freq)
     flattened = flatten_freq_struct(headwords_freqs)
     header = generate_header(headwords_freqs)
