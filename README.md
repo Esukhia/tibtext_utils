@@ -5,9 +5,11 @@ A place to put all short text-processing scripts that are used for Tibetan corpu
 Working scripts:
 
 ...
+
 In progress:
 
 ...
+
 To do:
 
 ...
