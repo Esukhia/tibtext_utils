@@ -4,11 +4,11 @@ A place to put all short text-processing scripts that are used for Tibetan corpu
 
 Working scripts:
 
-...
+Pre-processing Tsheg-stripper: Takes any series of half-spaces, spaces, returns, line breaks, and line starts and normalizes them to a normal single space. Strips end tshegs and/or double tshegs. (The goal being a very standardized text where a single white space separates each and every Tibetan word).
 
 In progress:
 
-Pre-processing Tsheg-stripper: Takes any series of half-spaces, spaces, returns, line breaks, and line starts and normalizes them to a normal single space. Strips end tshegs and/or double tshegs. (The goal being a very standardized text where a single white space separates each and every Tibetan word).
+
 
 To do:
 
