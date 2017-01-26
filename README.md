@@ -13,3 +13,5 @@ In progress:
 To do:
 
 File Pre-processing for Corpus Analysis - A script that takes a sub-set of corpus files (the 95 separate files that are all "Speech_Dialogs", for example) and dumps all their content into a single .txt file (Speech_Dialogs.txt in this case). Should be able to handle multiple input encodings and output should be in Unicode (a tool like WordSmith, for example, only likes Unicode). 
+
+Lemmatizer & POS tagger: A script that adds POS & Lemma info tags to text. 
