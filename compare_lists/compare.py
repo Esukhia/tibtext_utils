@@ -16,4 +16,3 @@ for f in os.listdir(in_path):
             non_monlam[word] = True
 non_words = '\n'.join(list(non_monlam.keys()))
 write_file('output/non_monlam.txt', non_words)
-
