@@ -1,6 +1,5 @@
 import os
 import re
-import csv
 from collections import defaultdict
 from PyTib.common import open_file, write_csv
 
@@ -93,7 +92,8 @@ def gen_grouped_freq(member_freq):
         else:
             freq = sum(list(family.values()))
             pair = (lemma, freq)
-            sorted_family = sorted([(member, m_freq) for member, m_freq in family.items()], key=lambda x: x[1], reverse=True)
+            sorted_family = sorted([(member, m_freq) for member, m_freq in family.items()],
+                                   key=lambda x: x[1], reverse=True)
             grouped_stems.append([pair]+sorted_family)
     freq_sorted = sorted(grouped_stems, key=lambda x: x[0][1], reverse=True)
     return freq_sorted
@@ -127,4 +127,5 @@ def main():
     write_csv('output/total_freqs.csv', flattened, header=header)
 
 
-main()
+if __name__ == '__main__':
+    main()
