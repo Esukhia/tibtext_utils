@@ -28,8 +28,6 @@ def find_prefix_stems(prefixes, stems, token):
             if pre not in stems:
                 stems[pre] = {}
             if 'prefixes' not in stems[pre]:
-                stems[pre]['prefixes'] = {}
-            if token not in stems[pre]['prefixes']:
                 stems[pre]['prefixes'] = defaultdict(int)
             # increment the count
             stems[pre]['prefixes'][token] += 1
@@ -42,8 +40,6 @@ def find_postfix_stems(postfixes, stems, token):
             if post not in stems:
                 stems[post] = {}
             if 'postfixes' not in stems[post]:
-                stems[post]['postfixes'] = {}
-            if token not in stems[post]['postfixes']:
                 stems[post]['postfixes'] = defaultdict(int)
             # increment the count
             stems[post]['postfixes'][token] += 1
@@ -57,8 +53,6 @@ def find_infix_stems(infixes, stems, token):
                 if inf not in stems:
                     stems[inf] = {}
                 if 'infixes' not in stems[inf]:
-                    stems[inf]['infixes'] = {}
-                if token not in stems[inf]['infixes']:
                     stems[inf]['infixes'] = defaultdict(int)
                 # increment the count
                 stems[inf]['infixes'][token] += 1
@@ -66,7 +60,7 @@ def find_infix_stems(infixes, stems, token):
 
 def process_corpus(in_path, prefixes, infixes, postfixes):
     stems = {}
-    for num, f in enumerate(os.listdir(in_path)):  # limiting to the first two files
+    for num, f in enumerate(os.listdir(in_path)):  # [:10] limiting to the first ten files
         tokens = pre_processing(open_file('{}/{}'.format(in_path, f)))
         tokens = [a for a in tokens if '་' in a]  # filters all the monosyllabled entries to speed up the execution
         for token in tokens:
@@ -96,10 +90,10 @@ def rowify(stem_dict):
 
 
 def main():
-    prefixes = prepare_affixes('stemmer/output/potential_prefixes.csv')
-    infixes = prepare_affixes('stemmer/output/potential_infixes.csv')
-    postfixes = prepare_affixes('stemmer/output/potential_postfixes.csv')
-    in_path = 'input'
+    prefixes = prepare_affixes('affix_finder/output/potential_prefixes.csv')
+    infixes = prepare_affixes('affix_finder/output/potential_infixes.csv')
+    postfixes = prepare_affixes('affix_finder/output/potential_postfixes.csv')
+    in_path = 'stemmer/input'
     stems = process_corpus(in_path, prefixes, infixes, postfixes)
     write_csv('stemmer/output/stems.csv', rowify(stems))
 
