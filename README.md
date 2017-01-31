@@ -4,6 +4,10 @@ A place to put all short text-processing scripts that are used for Tibetan corpu
 
 Working scripts:
 
+1. generate lists of potential affixes with find_root_suffixes.py
+2. select what you want to keep and paste the folder in 
+3. generate raw headword lists with ...
+4. check your headwords manually and you're done!
 ...
 
 In progress:
