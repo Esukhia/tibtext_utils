@@ -61,7 +61,7 @@ def find_infix_stems(infixes, stems, token):
 
 def process_corpus(in_path, prefixes, infixes, postfixes):
     stems = {}
-    for num, f in enumerate(os.listdir(in_path)):  # [:10] limiting to the first ten files
+    for num, f in enumerate(os.listdir(in_path)[:10]):  # [:10] limiting to the first ten files
         tokens = pre_processing(open_file('{}/{}'.format(in_path, f)))
         tokens = [a for a in tokens if '་' in a]  # filters all the monosyllabled entries to speed up the execution
         for token in tokens:
@@ -81,12 +81,15 @@ def rowify(stem_dict):
     rows = []
     sorted_stems = tib_sort(list(stem_dict.keys()))
     for stem in sorted_stems:
-        for affix, msg in [('prefixes', 'as a prefix'), ('infixes', 'as an infix'), ('postfixes', 'as a postfix')]:
+        for affix, msg in [('prefixes', 'PRE'), ('infixes', 'INF'), ('postfixes', 'POST')]:
             if affix in stem_dict[stem]:
                 tupled = [(token, freq) for token, freq in stem_dict[stem][affix].items()]
                 tupled = sorted(tupled, key=lambda x: x[1], reverse=True)
-                flattened = [a for tup in tupled for a in tup]
-                rows.append([stem, msg] + flattened)
+                tokens = sum([a[1] for a in tupled])
+                types = len(tupled)
+                flattened = [a for tup in tupled for a in reversed(tup)]
+                flattened = flattened[:500]  # only keep the first 500 members
+                rows.append(['{}|{}'.format(types, tokens), '', '', stem, msg] + flattened)
     return rows
 
 
