@@ -103,9 +103,9 @@ def process(in_path):
                 postfixes[post] += freq
         sorted_pre, sorted_in, sorted_post = sort_potentials(prefixes, infixes, postfixes)
     # write to csv files
-    write_csv('1affixes/potential_prefixes.csv', sorted_pre)
-    write_csv('1affixes/potential_infixes.csv', sorted_in)
-    write_csv('1affixes/potential_postfixes.csv', sorted_post)
+    write_csv('1a_affixes/potential_prefixes.csv', sorted_pre)
+    write_csv('1a_affixes/potential_infixes.csv', sorted_in)
+    write_csv('1a_affixes/potential_postfixes.csv', sorted_post)
 
 
 def main():

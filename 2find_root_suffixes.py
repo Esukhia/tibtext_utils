@@ -91,12 +91,12 @@ def rowify(stem_dict):
 
 
 def main():
-    prefixes = prepare_affixes('affix_finder/output/potential_prefixes.csv')
-    infixes = prepare_affixes('affix_finder/output/potential_infixes.csv')
-    postfixes = prepare_affixes('affix_finder/output/potential_postfixes.csv')
+    prefixes = prepare_affixes('1b_affixes_selection/potential_prefixes.csv')
+    infixes = prepare_affixes('1b_affixes_selection//potential_infixes.csv')
+    postfixes = prepare_affixes('1b_affixes_selection//potential_postfixes.csv')
     in_path = 'raw_corpus'
     stems = process_corpus(in_path, prefixes, infixes, postfixes)
-    write_csv('stemmer/output/stems.csv', rowify(stems))
+    write_csv('2a_roots_suffixes/stems.csv', rowify(stems))
 
 
 if __name__ == '__main__':

@@ -26,7 +26,7 @@ def gen_verb_families():
 
 
 def gen_particle_families():
-    particles = json.loads(open_file('resources/particles.json'))
+    particles = json.loads(open_file('3resources/particles.json'))
     return particles
 
 
