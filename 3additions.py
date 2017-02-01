@@ -1,10 +1,10 @@
 from collections import defaultdict
 import simplejson as json
-from misc.common import open_file, write_file, tib_sort
+from common import open_file, write_file, tib_sort
 
 
 def gen_verb_families():
-    raw = open_file('lemmatizer/resources/monlam_verbs.json')
+    raw = open_file('resources/monlam_verbs.json')
     monlam = json.loads(raw)
     # generate the structure for all
     all_families = defaultdict(list)
@@ -26,7 +26,7 @@ def gen_verb_families():
 
 
 def gen_particle_families():
-    particles = json.loads(open_file('lemmatizer/resources/particles.json'))
+    particles = json.loads(open_file('resources/particles.json'))
     return particles
 
 
@@ -43,4 +43,5 @@ verbs_formatted = format_families(verb_families)
 
 particle_families = gen_particle_families()
 particle_formatted = format_families(particle_families)
-write_file('lemmatizer/output/lemmas.txt', particle_formatted+'\n'+verbs_formatted)
+write_file('3additions/lemmas.txt', particle_formatted+'\n'+verbs_formatted)
+print('ok')

@@ -1,7 +1,7 @@
 import os
 import re
 from collections import defaultdict
-from PyTib.common import open_file, write_csv
+from common import open_file, write_csv
 
 
 def generate_prefixes(syls):
@@ -103,13 +103,13 @@ def process(in_path):
                 postfixes[post] += freq
         sorted_pre, sorted_in, sorted_post = sort_potentials(prefixes, infixes, postfixes)
     # write to csv files
-    write_csv('output/potential_prefixes.csv', sorted_pre)
-    write_csv('output/potential_infixes.csv', sorted_in)
-    write_csv('output/potential_postfixes.csv', sorted_post)
+    write_csv('1affixes/potential_prefixes.csv', sorted_pre)
+    write_csv('1affixes/potential_infixes.csv', sorted_in)
+    write_csv('1affixes/potential_postfixes.csv', sorted_post)
 
 
 def main():
-    in_path = 'input'
+    in_path = 'raw_corpus'
     # in_path = 'resources/uncompound_lexicon.txt'
     process(in_path)
 
