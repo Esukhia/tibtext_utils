@@ -124,7 +124,7 @@ def main():
     grouped_freqs = gen_grouped_freq(members_freq)
     flattened = flatten_freq_struct(grouped_freqs)
     header = generate_header(grouped_freqs)
-    write_csv('4a_stemmed/total_freqs.csv', flattened, header=header)
+    write_csv('5a_stemmed/total_freqs.csv', flattened, header=header)
 
 
 if __name__ == '__main__':

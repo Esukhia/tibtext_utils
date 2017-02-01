@@ -1,13 +1,12 @@
 # text_utils
 
-A place to put all short text-processing scripts that are used for Tibetan corpus analysis.
 
-Working scripts:
-
-1. generate lists of potential affixes with find_root_suffixes.py
-2. select what you want to keep and paste the folder in 
-3. generate raw headword lists with ...
-4. check your headwords manually and you're done!
+1. generate lists of potential affixes with `./1affix_finder.py`. Outputs to `/1_affixes/`. Add your selection of those affixes in `/1b_affixes_selection/`. 
+2.  find all words containing an affix with `./2find_root_suffixes.py`. Outputs to `/2a_roots_suffixes/`. Add your selection to `/2b_roots_suffixes_selection/`.
+3. with `/3additions.py` format Monlam verbs and particles (found in `/3ressources/`)for `families.txt` and writes to `/3additions/lemmas.txt`
+4. [TODO] format `2b_roots_suffixes_selection` content for `families.txt`, appending  `/3additions/lemmas.txt`.
+5. generate raw headword lists with `/5stemmer.py`
+6. check your headwords manually and you're done!
 ...
 
 In progress:
