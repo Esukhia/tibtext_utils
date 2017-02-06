@@ -61,7 +61,7 @@ def find_infix_stems(infixes, stems, token):
 
 def process_corpus(in_path, prefixes, infixes, postfixes):
     stems = {}
-    for num, f in enumerate(os.listdir(in_path)[:10]):  # [:10] limiting to the first ten files
+    for num, f in enumerate(os.listdir(in_path)[:]):  # [:10] limiting to the first ten files
         tokens = pre_processing(open_file('{}/{}'.format(in_path, f)))
         tokens = [a for a in tokens if '་' in a]  # filters all the monosyllabled entries to speed up the execution
         for token in tokens:
