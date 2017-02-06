@@ -93,13 +93,45 @@ def rowify(stem_dict):
     return rows
 
 
+def reorder_by_roots(stems):
+    roots = {}
+    for stem, affixes in stems.items():
+        for kind, affix_list in affixes.items():
+            for token, freq in affix_list.items():
+                if kind == 'postfixes':
+                    root = token.rstrip(stem)
+                    # populating roots
+                    if root not in roots:
+                        roots[root] = {}
+                    if kind not in roots[root]:
+                        roots[root][kind] = defaultdict(int)
+                    # increment the count
+                    roots[root][kind][token] += freq
+
+                if kind == 'prefixes':
+                    root = token.lstrip(stem)
+                    # populating roots
+                    if root not in roots:
+                        roots[root] = {}
+                    if kind not in roots[root]:
+                        roots[root][kind] = defaultdict(int)
+                    # increment the count
+                    roots[root][kind][token] += freq
+
+                if kind == 'infixes':
+                    print('The support for ordering by root for infixes is not yet added.\nStopping the execution')
+    return roots
+
+
 def main():
     prefixes = prepare_affixes('1b_affixes_selection/potential_prefixes.csv')
     infixes = prepare_affixes('1b_affixes_selection//potential_infixes.csv')
     postfixes = prepare_affixes('1b_affixes_selection//potential_postfixes.csv')
     in_path = 'raw_corpus'
     stems = process_corpus(in_path, prefixes, infixes, postfixes)
+    roots = reorder_by_roots(stems)
     write_csv('2a_roots_suffixes/stems.csv', rowify(stems))
+    write_csv('2a_roots_suffixes/roots.csv', rowify(roots))
 
 
 if __name__ == '__main__':
