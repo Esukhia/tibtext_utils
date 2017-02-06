@@ -1,7 +1,7 @@
 import os
 import re
 from collections import defaultdict
-from PyTib.common import open_file, write_csv
+from misc.common import open_file, write_file, tib_sort
 
 
 def pre_processing(string):
